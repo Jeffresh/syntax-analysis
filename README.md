@@ -2,11 +2,11 @@
 
 Dada la gramática G:
 
-S -> aAc | Ba | SCS | db
-A -> aA | ε
-B -> Sd | a
-C -> aCb
-D -> aAb | ace
+S -> aAc | Ba | SCS | db <br>
+A -> aA | ε <br>
+B -> Sd | a <br>
+C -> aCb <br>
+D -> aAb | ace <br>
 
 Se pide:
 - Generar una gramática equivalente mínima, sin símbolos inútiles ni inalcanzables, a la que llamaremos G2.
