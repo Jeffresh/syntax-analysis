@@ -16,4 +16,14 @@ D -> aAb | ace <br>
   - Generate the LL(1) table and decide if G3 is LL(1).
 - Generate the SLR(1) table for G2 and check if is SLR(1)
 
-Implement the grammar using SLY and check if the result with the file "debufile" is correct.
+Implement the grammar using SLY and check if the result with the file "debugfile" is correct.
+
+
+# Grammar minimization
+
+To reduce the grammar we have to remove variables that no lead to a sentence and remove non reachable symbols
+from initial state S, as well the rules where
+this variables appears in both cases.
+
+### Remove variables that no lead to a sentence
+
