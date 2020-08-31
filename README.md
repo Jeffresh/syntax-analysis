@@ -389,9 +389,58 @@ So our table will be some like:
 |  B 	|   	|   	|   	|   	|   	|
 |  C 	|   	|   	|   	|   	|   	|
 
+Now to get the values of each cell of the table, we have to compute
+the sets first and follow of each variable of our grammar *G3*.
 
+#### Computing First set
 
+To compute the *First set* of every variable we have to apply this 
+three rules:
 
+1) If A -> aβ: First(A) = {a}
+2) IF A -> ϵ: First(A) = {ϵ}
+3) If A = Xβ:
+    3) If X ≠>*ϵ: First(Xβ) = First(X)
+    3) iF X =>*ϵ: First(Xβ) = First(X) U First(β)
+    3) if X -> α_1 | α_2 | … | α_n:
+        - First(X) = First(α_1) U First(α_2) U ... U First(α_n)
+        
+So given our grammar:
+
+*G3*:
+````
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> aC| cS'
+C -> AcS' | S'
+````
+
+Applying the first rule to *S* variable we get:
+```
+First(S) = {a, d}.
+```
+
+Applying the first and second rule to *S'* a we get:
+
+```
+First(S') = {d,ε}
+```
+
+Applying the first and second rule to *A* a we get:
+
+```
+First(A) = {a,ε}
+```
+
+Applying the first rule to *B* variable we get:
+```
+First(B) = {a, c}.
+```
+Applying the last rule to *C* variable we get:
+```
+First(C) = First(A) U First(S') = {a,ε} U {d,ε} = {ε, a, d}
+```
 
 
 
