@@ -19,6 +19,40 @@ D -> aAb | ace <br>
 Implement the grammar using SLY and check if the result with the file "debugfile" is correct.
 
 
+# Grammar elements
+First we will describe the notation of the different elements that form
+part of the grammar so we have a grammar *G* defined by next the elements:
+
+#### Σ: Alphabet/tokens
+
+```
+Σ = {ϵ, a, b, c, d ,e}
+```
+
+
+#### N: not terminal symbols or variables
+
+```
+N = {S, A, B ,C, D}
+```
+
+
+#### Initial symbol/variable
+```
+S
+```
+
+
+#### P: set of rules
+
+```
+S -> aAc | Ba | SCS | db 
+A -> aA | ε 
+B -> Sd | a 
+C -> aCb 
+D -> aAb | ace 
+```
+
 # Grammar minimization
 
 To reduce the grammar we have to remove variables that no lead to a sentence and remove non reachable symbols
