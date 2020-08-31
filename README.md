@@ -25,7 +25,7 @@ To reduce the grammar we have to remove variables that no lead to a sentence and
 from initial state *S*, as well the rules where
 this variables appears in both cases.
 
-### Remove variables that no lead to a sentence
+### 1 - Remove variables that no lead to a sentence (and rules)
 
 Following the algorithm:
 
@@ -98,6 +98,112 @@ S -> aAc | Ba | db <br>
 A -> aA | ε <br>
 B -> Sd | a <br>
 D -> aAb | ace <br>
+````
+
+
+
+### 2 - Removing non reachable rules and variables/symbols
+
+Create a new variable *J* and *T* and initialize the variables in that way:
+
+```
+J = {S}
+N' = {S}
+N = {S, A, B ,D}
+T = ∅
+```
+
+Now while *J* is not empty we will:
+- Extract one element of J so extract S and update J:
+
+```
+J = ∅
+```
+- For all rules with this element in the header:
+    - Checks every variable in the body of the rule:
+        - If this variable is not in *N'* insert in *J* and *N'* sets.
+        - Add the terminal symbols in *T*
+
+So for *S* we got the rules:
+
+```
+S -> aAc | Ba | db
+```
+
+Update and update *J*, *N'* and *T* 
+
+```
+N' ={S, A ,B}
+J = {A, B}
+T = {a, c, d, b}
+```
+
+So now extract the new symbol for *J*:
+```
+J = {B}
+```
+
+So for *A* got the rules:
+
+```
+A -> aA | ε
+```
+
+*A* and *a* are in *N'* and *T* so nothing changes in this iteration, we can include *ϵ*. For me *ϵ* is
+more like a character that represent a "concept" than a token but we will include because strictly is part of the alphabet.
+
+
+```
+N' ={S, A ,B}
+J = {B}
+T = {ϵ, a, c, d, b}
+```
+
+So extract the next element of *J*:
+
+```
+J = ∅
+```
+
+So for *B* got the rules:
+```
+B -> Sd | a
+```
+
+*S* , *d* and *a* are in the sets *N'* and T so nothing changes in this iteration.
+
+```
+N' ={S, A ,B}
+J = ∅
+T = {ϵ, a, c, d, b}
+```
+
+Now *J* is empty so for every variable that's not in *N'* and all symbols that's not in *T*
+we have to remove it and all rules that including it so:
+
+```
+N = {S, A, B ,D}
+N' ={S, A ,B}
+-------------------------
+T = {a, c, d, b}
+Σ = {ϵ, a, b, c, d ,e}
+```
+
+We have to remove *D* and *e* and the rules where it appears so from  *G'*:
+
+````
+S -> aAc | Ba | db <br>
+A -> aA | ε <br>
+B -> Sd | a <br>
+D -> aAb | ace <br>
+````
+
+We get *G2*:
+
+````
+S -> aAc | Ba | db <br>
+A -> aA | ε <br>
+B -> Sd | a <br>
 ````
 
 
