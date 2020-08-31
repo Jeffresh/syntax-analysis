@@ -418,7 +418,7 @@ C -> AcS' | S'
 
 Applying the first rule to *S* variable we get:
 ```
-First(S) = {a, d}.
+First(S) = {a, d}
 ```
 
 Applying the first and second rule to *S'* a we get:
@@ -435,11 +435,21 @@ First(A) = {a,ε}
 
 Applying the first rule to *B* variable we get:
 ```
-First(B) = {a, c}.
+First(B) = {a, c}
 ```
 Applying the last rule to *C* variable we get:
 ```
 First(C) = First(A) U First(S') = {a,ε} U {d,ε} = {ε, a, d}
+```
+
+Putting all firsts set together we have:
+
+```
+First(S) = {a, d}
+First(S') = {d,ε}
+First(A) = {a,ε}
+First(B) = {a, c}
+First(C) = {ε, a, d}
 ```
 
 
