@@ -358,8 +358,36 @@ B -> aC| cS'
 C -> AcS' | S'
 ````
 
+### Checking if G3 is a LL(1) grammar
 
+To know if *G3* is a LL(1) grammar we have to construct the analysis table. If
+in this table there is only one rule per value, our grammar is LL(1) because that means
+that when you read one input character, you can always decide which rule to apply.
 
+#### Constructing the analysis table to G3
+
+Construct we have to do some steps first. The rows of the table will be
+our variables:
+
+```
+N = {S, S', A, B, C}
+```
+
+And the rows will be the tokens + '$':
+
+```
+T = {a, b, c, d}
+```
+
+So our table will be some like:
+
+|    	| a 	| b 	| c 	| d 	| $ 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+|  S 	|   	|   	|   	|   	|   	|
+|  S' 	|   	|   	|   	|   	|   	|
+|  A 	|   	|   	|   	|   	|   	|
+|  B 	|   	|   	|   	|   	|   	|
+|  C 	|   	|   	|   	|   	|   	|
 
 
 
