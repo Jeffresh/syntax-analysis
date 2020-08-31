@@ -241,3 +241,134 @@ B -> Sd | a
 ````
 
 
+### Transform the grammar in one LL(1)
+A LL(1) grammar is a type of grammar in witch, for every input symbol exist you can
+decide the next step only with one rule. So to achieve that we have to delete the left recursion
+first and factorize to try to get a minimum not ambiguous grammar LL(1).
+
+### Preprocessing
+
+First we will try to remove some variables with substitutions if it possible to simplify our grammar *G2*
+
+ *G2*:
+
+````
+S -> aAc | Ba | db 
+A -> aA | ε 
+B -> Sd | a 
+````
+
+We notice that *B* rule can be replaced into *S* rule so with this simple 
+step we will remove one variable(*B*).
+
+```
+Replacement
+-------------
+S -> Ba
+B -> Sd | a
+-------------
+S -> Sda | aa
+
+```
+
+And update our grammar *G2'*:
+
+````
+S -> aAc | Sda | db | aa 
+A -> aA | ε 
+````
+
+
+
+### Deleting left recursion
+
+How you can see we have direct and indirect left recursion in both rules
+
+*G2'*:
+````
+S -> aAc | Sda | db | aa 
+A -> aA | ε 
+````
+
+Now we have to delete the left recursion following the algorithm we have to create a new symbol or variable
+in this case *S'*, create the right recursion to the rules with *S* header and delete the rules with left recursion. After that
+create a new rules with *S'* to do the recursions with the *S* bodies
+and another rule that derive in *ϵ* so:
+
+*G2'*:
+````
+S -> aAcS' | dbS' | aaS' 
+S'-> daS' | ε
+A -> aA | ε 
+````
+And now we removed the left recursion.
+
+#### Factorization
+
+The rule S as to bodies with starting with the same symbol so in case
+to try to automatize this, the analyzer cannot  decide which rule to apply so
+we can have to factorize that rule just applying the algorithm.
+
+In this case we only have to create a new variable in this case *B*, and factorize de part that cause the problem the *a*
+moving the following part to a new rule with the same header ( *B*). So doing that we have:
+
+*G2'*:
+````
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> AcS' | aS'
+````
+
+Now we have another problem we can reach *A* from *B* and this two rules has bodies that
+start with the same character so in that case we have one case in which we cannot decide then next
+rule to apply, remember that we are trying to get a LL(1) grammar, so we need to try to factorize this. To do that we could do
+a replacement of *A* into *B*:
+
+*G2'*:
+````
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> aAcS' | aS'| cS'
+````
+
+And now do a factorization in *B* in the same way that we do before to the same symbol *a* creating a new variable *C*:
+
+*G2'*:
+````
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> aC| cS'
+C -> AcS' | S'
+````
+
+So now we meet all the main conditions to generate a LL(1) grammar because we dont have
+left recursion, direct or indirect, and we have not rules with the same header or with bodies 
+that start with the same symbols which could be apply at the same time when we read the next
+input character so we get *G3*:
+
+*G3*:
+````
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> aC| cS'
+C -> AcS' | S'
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
