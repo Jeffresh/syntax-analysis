@@ -35,11 +35,11 @@ N = {S, A, B ,C ,D}
 ```
 Rules
 ```
-S -> aAc | Ba | SCS | db <br>
-A -> aA | ε <br>
-B -> Sd | a <br>
-C -> aCb <br>
-D -> aAb | ace <br>
+S -> aAc | Ba | SCS | db 
+A -> aA | ε 
+B -> Sd | a 
+C -> aCb 
+D -> aAb | ace 
 ```
 
 First create a new variable: 
@@ -94,10 +94,10 @@ C -> aCb
 And we update our grammar *G'* with two rules less:
 
 ````
-S -> aAc | Ba | db <br>
-A -> aA | ε <br>
-B -> Sd | a <br>
-D -> aAb | ace <br>
+S -> aAc | Ba | db 
+A -> aA | ε 
+B -> Sd | a 
+D -> aAb | ace 
 ````
 
 
@@ -192,18 +192,18 @@ T = {a, c, d, b}
 We have to remove *D* and *e* and the rules where it appears so from  *G'*:
 
 ````
-S -> aAc | Ba | db <br>
-A -> aA | ε <br>
-B -> Sd | a <br>
-D -> aAb | ace <br>
+S -> aAc | Ba | db 
+A -> aA | ε 
+B -> Sd | a 
+D -> aAb | ace 
 ````
 
 We get *G2*:
 
 ````
-S -> aAc | Ba | db <br>
-A -> aA | ε <br>
-B -> Sd | a <br>
+S -> aAc | Ba | db 
+A -> aA | ε 
+B -> Sd | a 
 ````
 
 
