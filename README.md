@@ -16,6 +16,7 @@ D -> aAb | ace <br>
   - Generate the LL(1) table and decide if G3 is LL(1).
 - Generate the SLR(1) table for G2 and check if is SLR(1)
 
+# Future work:
 Implement the grammar using SLY and check if the result with the file "debugfile" is correct.
 
 
