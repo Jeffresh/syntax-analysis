@@ -1072,7 +1072,7 @@ Fill the table we get:
 |  4 	|                    	|         	|           	|  R(S -> db) 	|  R(S -> db) 	|   	|   	|   	|
 | 5  	| SHIFT 6            	|         	|           	|             	|             	|   	|   	|   	|
 | 6  	|                    	|         	|           	| R(S -> Ba)  	| R(S -> Ba)  	|   	|   	|   	|
-| 7  	| SHIFT 10 R(B -> a) 	|         	| R(A -> ε) 	|             	|             	|   	|   	|   	|
+| 7  	| SHIFT 10 | R(B -> a) 	|         	| R(A -> ε) 	|             	|             	|   	|   	|   	|
 | 8  	|                    	|         	| SHIFT 9   	|             	|             	|   	|   	|   	|
 | 9  	|                    	|         	|           	| R(S -> aAc) 	| R(S -> aAc) 	|   	|   	|   	|
 | 10 	|                    	|         	| R(A -> ε) 	|             	|             	|   	|   	|   	|
@@ -1103,7 +1103,7 @@ So filling the table:
 |  4 	|                    	|         	|           	|  R(S -> db) 	|  R(S -> db) 	|        	|         	|        	|
 | 5  	| SHIFT 6            	|         	|           	|             	|             	|        	|         	|        	|
 | 6  	|                    	|         	|           	| R(S -> Ba)  	| R(S -> Ba)  	|        	|         	|        	|
-| 7  	| SHIFT 10 R(B -> a) 	|         	| R(A -> ε) 	|             	|             	|        	| GOTO 8  	|        	|
+| 7  	| SHIFT 10 | R(B -> a) 	|         	| R(A -> ε) 	|             	|             	|        	| GOTO 8  	|        	|
 | 8  	|                    	|         	| SHIFT 9   	|             	|             	|        	|         	|        	|
 | 9  	|                    	|         	|           	| R(S -> aAc) 	| R(S -> aAc) 	|        	|         	|        	|
 | 10 	|                    	|         	| R(A -> ε) 	|             	|             	|        	|         	|        	|
@@ -1135,7 +1135,7 @@ So filling the table we get:
 |  4 	|                    	|         	|           	|  R(S -> db) 	|  R(S -> db)  	|        	|         	|        	|
 | 5  	| SHIFT 6            	|         	|           	|             	|              	|        	|         	|        	|
 | 6  	|                    	|         	|           	| R(S -> Ba)  	| R(S -> Ba)   	|        	|         	|        	|
-| 7  	| SHIFT 10 R(B -> a) 	|         	| R(A -> ε) 	|             	|              	|        	| GOTO 8  	|        	|
+| 7  	| SHIFT 10 | R(B -> a) 	|         	| R(A -> ε) 	|             	|              	|        	| GOTO 8  	|        	|
 | 8  	|                    	|         	| SHIFT 9   	|             	|              	|        	|         	|        	|
 | 9  	|                    	|         	|           	| R(S -> aAc) 	| R(S -> aAc)  	|        	|         	|        	|
 | 10 	|                    	|         	| R(A -> ε) 	|             	|              	|        	|         	|        	|
