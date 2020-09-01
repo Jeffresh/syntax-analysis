@@ -643,4 +643,260 @@ Follow(C) = {$}
 |  C 	| C -> AcS'   	| -| -| C -> S'   	| C -> S'  	|
 
 
-So, how you can see is a LL(1) grammar because there is only a rule per cell in the table
+So, how you can see is a LL(1) grammar because there is only a rule per cell in the table.
+
+
+### Checking if G2 grammar is SLR
+
+To check if *G2* grammar is SLR we have to construct the SLR table analysis
+and observe if per cell there is only one rule.
+
+*G2* grammar:
+``` 
+S -> aAc | Ba | db 
+A -> aA | ε 
+B -> Sd | a 
+```
+
+The first step to create the table is add a new state *S'* to our initial state *S* and create the
+*DFA*.
+
+*G2'* grammar:
+``` 
+S' -> S
+S -> aAc | Ba | db 
+A -> aA | ε 
+B -> Sd | a 
+```
+
+Now we will generate the items adding the dot(*) and computing the closure of the items. Starting with
+this new state *S'*. So create this new state:
+
+```
+S' -> *S
+```
+
+Now compute the closure of this item, that is the rules of variable that follows the dot in this case *S*, this step is recursive
+ so if *S* has rules that start with a variable( in this case *B*) we have to add the rules of *B*
+ starting with a dot. So we get:
+
+```
+---------------------
+_________
+S' -> *S
+_________
+Closure:
+S -> *aAc |*Ba | *db 
+B -> *Sd | *a
+---------------------
+```
+Now we will generate more nodes with the transitions that generate our
+rules. The transitions are created with values the symbol that follow the dot
+and in the new states we will storage the same rules that do a a transition with the same 
+value moving the dot one place to the right. We will do this step until the dot is in the end
+of the rule.
+
+
+```
+---------------------
+_________
+S' -> *S
+_________
+Closure:
+S -> *aAc |*Ba | *db 
+B -> *Sd | *a
+---------------------
+```
+
+With *S* we create a new node
+
+```
+---------------------
+_________
+S' -> S*
+B -> S*d
+_________
+---------------------
+```
+
+This node with the rule *B* generate another node with transition *d*
+
+```
+---------------------
+_________
+B -> Sd*
+_________
+---------------------
+```
+
+This node only have items wheres the dot is in the end so we cant generate more child with this node. 
+Back to the main node:
+
+```
+---------------------
+_________
+S' -> *S
+_________
+Closure:
+S -> *aAc |*Ba | *db 
+B -> *Sd | *a
+---------------------
+```
+
+Now with transition *d*:
+
+```
+---------------------
+_________
+S -> d*b
+_________
+---------------------
+```
+
+And from this node with transition *b*:
+
+```
+---------------------
+_________
+S -> db*
+_________
+---------------------
+```
+
+Back to the main node:
+
+```
+---------------------
+_________
+S' -> *S
+_________
+Closure:
+S -> *aAc |*Ba | *db 
+B -> *Sd | *a
+---------------------
+```
+
+We can transition with *B*:
+
+```
+---------------------
+_________
+S -> B*a
+_________
+---------------------
+```
+
+Now with *a*:
+
+```
+---------------------
+_________
+S -> Ba*
+_________
+---------------------
+```
+
+Back to the main node:
+
+```
+---------------------
+_________
+S' -> *S
+_________
+Closure:
+S -> *aAc |*Ba | *db 
+B -> *Sd | *a
+---------------------
+```
+
+We only can transition from this node with *a*
+
+```
+---------------------
+_________
+S -> a*Ac
+B -> a*
+_________
+
+---------------------
+```
+
+And we have the dot in front of a variable so compute de closure of the item. *A* has a ε so
+when this happens we do a derivation to the dot.
+
+```
+---------------------
+_________
+S -> a*Ac
+B -> a*
+_________
+A -> *aA
+A -> *
+---------------------
+```
+
+Now we will continue throw this node as main doing a transition with *A*:
+
+```
+---------------------
+_________
+S -> aA*c
+_________
+---------------------
+```
+
+And now with *C*:
+
+```
+---------------------
+_________
+S -> aAc*
+_________
+---------------------
+```
+
+Back to the new main node:
+
+```
+---------------------
+_________
+S -> a*Ac
+B -> a*
+_________
+A -> *aA
+A -> *
+---------------------
+```
+We can do a transition with *a*:
+
+```
+---------------------
+_________
+A -> a*A
+_________
+A -> *
+---------------------
+```
+
+Closure the *A*
+
+```
+---------------------
+_________
+A -> a*A
+A -> *aA
+_________
+A -> *
+---------------------
+```
+
+With *a* we got a transition to the same node. Only left *A*:
+
+```
+---------------------
+_________
+A -> aA*
+_________
+---------------------
+```
+
