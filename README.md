@@ -442,12 +442,12 @@ Applying the last rule to *C* variable we get:
 First(C) = First(A) U First(S') = {a,ε} U {d,ε} = {ε, a, d}
 ```
 
-Putting all firsts set together we have:
+Putting all first sets together we have:
 
 ```
 First(S) = {a, d}
-First(S') = {d,ε}
-First(A) = {a,ε}
+First(S') = {d, ε}
+First(A) = {a, ε}
 First(B) = {a, c}
 First(C) = {ε, a, d}
 ```
