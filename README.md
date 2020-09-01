@@ -1140,6 +1140,8 @@ So filling the table we get:
 | 9  	|                           	|         	|           	| R(S -> aAc) 	| R(S -> aAc)  	|        	|         	|        	|
 | 10 	|                           	|         	| R(A -> ε) 	|             	|              	|        	|         	|        	|
 | 11 	| SHIFT 10                  	|         	|           	|             	|              	|        	| GOTO 11 	|        	|
+
+
 And our table is finished!
 
 
