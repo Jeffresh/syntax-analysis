@@ -903,3 +903,97 @@ _________
 Now numbering the states and composing a graph we have:
 
 ![dfa_srl](/assets/dfa_SRL.jpg)
+
+
+Now to start to fill the table *Action* and *GOTO* we need only one thing more
+the follow sets of the grammar *G2*.
+
+*G2'* grammar:
+``` 
+S -> aAc | Ba | db 
+S' -> S
+A -> aA | ε 
+B -> Sd | a 
+```
+
+Follow set of *S*, is in the body of *S'* in the last position, and in the body
+of *B* before *d* so:
+
+```
+S = {d} U Follow(S')
+```
+
+Follow sef of *S'* in his body only contains the initial state so:
+
+```
+S' = {$}
+```
+
+Now we can update de follow set of *S*:
+
+Follow set of *S*, is in the body of *S'* in the last position, and in the body
+of *B* before *d* so:
+
+```
+Follow(S) = {d} U Follow(S') = {$, d}
+```
+
+Follow set of *A* is in the body of S before *c* character and is the last
+symbol in the a rule with itself as header so:
+
+```
+Follow(A) = {c} U Follow(A) = {c}
+```
+
+And to finish *B* variable is only in one rule in *S* before *a* character so:
+
+```
+Follow(B) = {a}
+```
+
+Putting all Follow sets together:
+
+```
+Follow(S) = {$, d}
+Follow(S') = {$}
+Follow(A) = {c}
+Follow(B) = {a}
+```
+
+We will use this set to get the values of the items with a dot (*) in the end.
+
+
+### Constructing the SLR table
+
+We will construct a table with:
+
+- N rows, N = number of states.
+
+And we have two tables, *ACTION* table and *GOTO* table
+
+- *ACTION* table:
+    - M columns; M = tokens + $.
+
+- *GOTO* table
+    - M' columns: M' = variables without *S'*.
+    
+
+We will represent this table as one, because has the same rows and 
+are interconnected so we will have some like:
+
+|    	| a 	| b 	| c 	| d 	| $ 	| S 	| A 	| B 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|---	|---	|---	|
+|  0 	|   	|   	|   	|   	|   	|   	|   	|   	|
+|  1 	|   	|   	|   	|   	|   	|   	|   	|   	|
+|  2 	|   	|   	|   	|   	|   	|   	|   	|   	|
+|  3 	|   	|   	|   	|   	|   	|   	|   	|   	|
+|  4 	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 5  	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 6  	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 7  	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 8  	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 9  	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 10 	|   	|   	|   	|   	|   	|   	|   	|   	|
+| 11 	|   	|   	|   	|   	|   	|   	|   	|   	|
+
+
