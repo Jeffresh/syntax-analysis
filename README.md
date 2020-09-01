@@ -1037,7 +1037,7 @@ Now filling the table we have:
 | 11 	| SHIFT 10 	|         	|         	|         	|   	|   	|   	|   	|
 
 
-Step two is about reducing, so we will get the items ending in a dot (*) after by a terminal, and reducing them
+Step two is about reducing, so we will get the items ending in a dot (*) , and reducing them
 using the cell marked with the values of his follow set and the node number if the the body of a rule only have a dot we 
 will change de dot by *ε*. We will represent de *REDUCE* using
 *R(A -> α) being A, a variable different than S'* so getting this items we get:
@@ -1051,6 +1051,7 @@ Follow(S) = {d, $}
 __________________
 A -> *: 10
 A -> *: 7
+A -> aA*: 11
 ------------------
 Follow(A) = {c}
 __________________
@@ -1062,17 +1063,49 @@ Follow(B) = {a}
 
 Fill the table we get:
 
-|    	|          a         	|    b    	|    c    	|      d      	|      $      	| S 	| A 	| B 	|
-|:--:	|:------------------:	|:-------:	|:-------:	|:-----------:	|:-----------:	|---	|---	|---	|
-|  0 	|       SHIFT 7      	|         	|         	|   SHIFT 3   	|             	|   	|   	|   	|
-|  1 	|      R(B -> 2)     	|         	|         	|   SHIFT 2   	|             	|   	|   	|   	|
-|  2 	|                    	|         	|         	|             	|             	|   	|   	|   	|
-|  3 	|                    	| SHIFT 4 	|         	|             	|             	|   	|   	|   	|
-|  4 	|                    	|         	|         	|  R(S -> db) 	|  R(S -> db) 	|   	|   	|   	|
-| 5  	| SHIFT 6            	|         	|         	|             	|             	|   	|   	|   	|
-| 6  	|                    	|         	|         	| R(S -> Ba)  	| R(S -> Ba)  	|   	|   	|   	|
-| 7  	| SHIFT 10 R(B -> a) 	|         	|         	|             	| R(A -> ε)   	|   	|   	|   	|
-| 8  	|                    	|         	| SHIFT 9 	|             	|             	|   	|   	|   	|
-| 9  	|                    	|         	|         	| R(S -> aAc) 	| R(S -> aAc) 	|   	|   	|   	|
-| 10 	|                    	|         	|         	|             	| R(A -> ε)   	|   	|   	|   	|
-| 11 	| SHIFT 10           	|         	|         	|             	|             	|   	|   	|   	|
+|    	|          a         	|    b    	|     c     	|      d      	|      $      	| S 	| A 	| B 	|
+|:--:	|:------------------:	|:-------:	|:---------:	|:-----------:	|:-----------:	|---	|---	|---	|
+|  0 	|       SHIFT 7      	|         	|           	|   SHIFT 3   	|             	|   	|   	|   	|
+|  1 	|      R(B -> 2)     	|         	|           	|   SHIFT 2   	|             	|   	|   	|   	|
+|  2 	|                    	|         	|           	|             	|             	|   	|   	|   	|
+|  3 	|                    	| SHIFT 4 	|           	|             	|             	|   	|   	|   	|
+|  4 	|                    	|         	|           	|  R(S -> db) 	|  R(S -> db) 	|   	|   	|   	|
+| 5  	| SHIFT 6            	|         	|           	|             	|             	|   	|   	|   	|
+| 6  	|                    	|         	|           	| R(S -> Ba)  	| R(S -> Ba)  	|   	|   	|   	|
+| 7  	| SHIFT 10 R(B -> a) 	|         	| R(A -> ε) 	|             	|             	|   	|   	|   	|
+| 8  	|                    	|         	| SHIFT 9   	|             	|             	|   	|   	|   	|
+| 9  	|                    	|         	|           	| R(S -> aAc) 	| R(S -> aAc) 	|   	|   	|   	|
+| 10 	|                    	|         	| R(A -> ε) 	|             	|             	|   	|   	|   	|
+| 11 	| SHIFT 10           	|         	|           	|             	|             	|   	|   	|   	|
+
+Now we will continue with non terminals transitions, this values will be in the *GOTO* table and the column is marked
+by the value of the non terminal that do the transition and the row is the node where is from and the value of the cell
+the node where is going the transition so:
+
+
+```
+0| S' -> S*: 1 
+__________________
+0| S -> B*a : 5
+7| S -> aA*c: 8
+__________________
+10| A-> aA*: 11
+```
+
+So filling the table:
+
+|    	|          a         	|    b    	|     c     	|      d      	|      $      	| S      	| A       	| B      	|
+|:--:	|:------------------:	|:-------:	|:---------:	|:-----------:	|:-----------:	|--------	|---------	|--------	|
+|  0 	|       SHIFT 7      	|         	|           	|   SHIFT 3   	|             	| GOTO 1 	|         	| GOTO 5 	|
+|  1 	|      R(B -> 2)     	|         	|           	|   SHIFT 2   	|             	|        	|         	|        	|
+|  2 	|                    	|         	|           	|             	|             	|        	|         	|        	|
+|  3 	|                    	| SHIFT 4 	|           	|             	|             	|        	|         	|        	|
+|  4 	|                    	|         	|           	|  R(S -> db) 	|  R(S -> db) 	|        	|         	|        	|
+| 5  	| SHIFT 6            	|         	|           	|             	|             	|        	|         	|        	|
+| 6  	|                    	|         	|           	| R(S -> Ba)  	| R(S -> Ba)  	|        	|         	|        	|
+| 7  	| SHIFT 10 R(B -> a) 	|         	| R(A -> ε) 	|             	|             	|        	| GOTO 8  	|        	|
+| 8  	|                    	|         	| SHIFT 9   	|             	|             	|        	|         	|        	|
+| 9  	|                    	|         	|           	| R(S -> aAc) 	| R(S -> aAc) 	|        	|         	|        	|
+| 10 	|                    	|         	| R(A -> ε) 	|             	|             	|        	|         	|        	|
+| 11 	| SHIFT 10           	|         	|           	|             	|             	|        	| GOTO 11 	|        	|
+
