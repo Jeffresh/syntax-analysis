@@ -997,3 +997,41 @@ are interconnected so we will have some like:
 | 11 	|   	|   	|   	|   	|   	|   	|   	|   	|
 
 
+
+#### ACTION table
+
+Fist we will fill the action table, following the next algorithm:
+
+1) Select all nodes with transitions with tokens and put the value on the table
+being the column the state number where the transition going. The value will be preceded
+by *SHIFT*.
+
+So following our graph we can see this transitions
+
+````
+0-d: 3
+0-a: 7
+1-d: 2
+3-b: 4
+5-a: 6
+7-a: 10
+8-c: 9
+10-a: 10
+````
+
+Now filling the table we have:
+
+|    	|     a    	|    b    	|    c    	|    d    	| $ 	| S 	| A 	| B 	|
+|:--:	|:--------:	|:-------:	|:-------:	|:-------:	|:-:	|---	|---	|---	|
+|  0 	|  SHIFT 7 	|         	|         	| SHIFT 3 	|   	|   	|   	|   	|
+|  1 	|          	|         	|         	| SHIFT 2 	|   	|   	|   	|   	|
+|  2 	|          	|         	|         	|         	|   	|   	|   	|   	|
+|  3 	|          	| SHIFT 4 	|         	|         	|   	|   	|   	|   	|
+|  4 	|          	|         	|         	|         	|   	|   	|   	|   	|
+| 5  	| SHIFT 6  	|         	|         	|         	|   	|   	|   	|   	|
+| 6  	|          	|         	|         	|         	|   	|   	|   	|   	|
+| 7  	| SHIFT 10 	|         	|         	|         	|   	|   	|   	|   	|
+| 8  	|          	|         	| SHIFT 9 	|         	|   	|   	|   	|   	|
+| 9  	|          	|         	|         	|         	|   	|   	|   	|   	|
+| 10 	|          	|         	|         	|         	|   	|   	|   	|   	|
+| 11 	| SHIFT 10 	|         	|         	|         	|   	|   	|   	|   	|
