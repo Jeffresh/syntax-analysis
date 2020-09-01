@@ -617,6 +617,7 @@ B -> aC
 First(C) - {ε} = {a, d}
 
 B -> cS'
+First(S') - {ε} ={d}
 Follow(B) = {$}
 ```
 
