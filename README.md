@@ -551,9 +551,7 @@ C -> AcS' | S'
 
 ```
 
-Starting with *S*
-
-We apply the first and the third rule:
+Starting with *S* we apply the first and the third rule:
 
 ```
 S -> aB
@@ -571,3 +569,25 @@ Follow(S) = {$}
 |  A 	|   	|   	|   	|   	|   	|
 |  B 	|   	|   	|   	|   	|   	|
 |  C 	|   	|   	|   	|   	|   	|
+
+
+Filling *S'* rules we apply first and second rule
+
+```
+S' -> daS'
+First(S') - {ε} = {d}
+
+S' -> ε
+Follow(S') = {$}
+```
+
+
+|    	| a 	| b 	| c 	| d 	| $ 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+|  S 	| S -> aB	|   	| S -> aB   	|   	|  S -> dbS' 	|
+|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
+|  A 	|   	|   	|   	|   	|   	|
+|  B 	|   	|   	|   	|   	|   	|
+|  C 	|   	|   	|   	|   	|   	|
+
+  
