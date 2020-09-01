@@ -462,8 +462,56 @@ Now focusing on the rules bodies we have to follow the this rules:
     2) β ≠>* ε: Follow(A) = First(β) - {ε}
 3) A = S: Follow(A) = {$}
 
+So given our grammar:
+
+*G3*:
+````
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> aC| cS'
+C -> AcS' | S'
+````
+
+The *S* variable is the initial so we have to include *$* and it isnt in the body of 
+other rule so:
+
+```
+S = {$} 
+```
+
+The *S'* variable is in the end of the the rules with headers *S*, *S'*, *B*, *C* inst followint other variable so applying
+the first rule we get:
+
+```
+S' = Follow(C) U Follow(B) U Follow(S') = {$}
+```
+
+The *A* variable is *A* and *C* bodies, applying the first rule and in *C* rule has a following *c* so:
+
+```
+A = Follow(A) U {c} = {c}
+```
+
+The *B* variable is in *S* rules body with no following symbols so apply the first rule:
+
+```
+B = Follow(S) = {$}
+```
+
+The *C* variable is in the *B* rule in the end so applying the first rule:
+
+```
+C = Follow(B) = {$}
+```
 
 
+Putting the Follow sets together we get:
 
-
-
+```
+S = {$}
+S'= {$}
+A = {c}
+B = {$}
+C = {$}
+```
