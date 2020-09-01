@@ -558,13 +558,14 @@ S -> aB
 First(B) = {a, c}
 
 S -> dbS'
+First(S') - {ε}
 Follow(S) = {$}
 ```
 
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	|S -> aB   	|   	|  S -> dbS' 	|
+|  S 	| S -> aB	|   	|S -> aB   	| S -> dbS' 	|  S -> dbS' 	|
 |  S' 	|   	|   	|   	|   	|   	|
 |  A 	|   	|   	|   	|   	|   	|
 |  B 	|   	|   	|   	|   	|   	|
@@ -584,10 +585,26 @@ Follow(S') = {$}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| S -> aB   	|   	|  S -> dbS' 	|
+|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
 |  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
 |  A 	|   	|   	|   	|   	|   	|
 |  B 	|   	|   	|   	|   	|   	|
 |  C 	|   	|   	|   	|   	|   	|
 
-  
+ With *A* variable we apply the first and the second:
+ 
+ ```
+A -> aA
+First(A) - {ε} = {a}
+
+A -> ε
+Follow(A) = {c}
+```
+
+|    	| a 	| b 	| c 	| d 	| $ 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
+|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
+|  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
+|  B 	|   	|   	|   	|   	|   	|
+|  C 	|   	|   	|   	|   	|   	|
