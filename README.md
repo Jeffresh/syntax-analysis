@@ -591,7 +591,7 @@ Follow(S') = {$}
 |  B 	|   	|   	|   	|   	|   	|
 |  C 	|   	|   	|   	|   	|   	|
 
- With *A* variable we apply the first and the second:
+With *A* variable we apply the first and the second:
  
  ```
 A -> aA
@@ -607,4 +607,23 @@ Follow(A) = {c}
 |  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
 |  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
 |  B 	|   	|   	|   	|   	|   	|
+|  C 	|   	|   	|   	|   	|   	|
+
+
+With *B* variable we apply the first and the second:
+ 
+ ```
+B -> aC
+First(C) - {ε} = {a, d}
+
+B -> cS'
+Follow(B) = {$}
+```
+
+|    	| a 	| b 	| c 	| d 	| $ 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
+|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
+|  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
+|  B 	| B -> aC  	|   	|   	| B -> aC,  B -> cS'  	| B -> cS'    	|
 |  C 	|   	|   	|   	|   	|   	|
