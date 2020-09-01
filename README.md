@@ -395,7 +395,7 @@ the sets first and follow of each variable of our grammar *G3*.
 #### Computing First set
 
 To compute the *First set* of every variable we have to apply this 
-three rules:
+three rules, focusin on the headers.
 
 1) If A -> aβ: First(A) = {a}
 2) IF A -> ϵ: First(A) = {ϵ}
@@ -452,7 +452,15 @@ First(B) = {a, c}
 First(C) = {ε, a, d}
 ```
 
+#### Computing the Follow set
 
+Now focusing on the rules bodies we have to follow the this rules:
+
+1) If B -> αA: Follow(A) = Follow(B)
+2) If B -> αAβ and 
+    2) β =>* ε: Follow(A) = First(β) - {ε} U Follow(B)
+    2) β ≠>* ε: Follow(A) = First(β) - {ε}
+3) A = S: Follow(A) = {$}
 
 
 
