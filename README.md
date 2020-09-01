@@ -399,7 +399,7 @@ three rules, focusin on the headers.
 
 1) If A -> aβ: First(A) = {a}
 2) IF A -> ϵ: First(A) = {ϵ}
-3) If A = Xβ:
+3) If A -> Xβ:
     3) If X ≠>*ϵ: First(Xβ) = First(X)
     3) iF X =>*ϵ: First(Xβ) = First(X) U First(β)
     3) if X -> α_1 | α_2 | … | α_n:
@@ -424,13 +424,13 @@ First(S) = {a, d}
 Applying the first and second rule to *S'* a we get:
 
 ```
-First(S') = {d,ε}
+First(S') = {d, ε}
 ```
 
 Applying the first and second rule to *A* a we get:
 
 ```
-First(A) = {a,ε}
+First(A) = {a, ε}
 ```
 
 Applying the first rule to *B* variable we get:
@@ -484,7 +484,7 @@ The *S'* variable is in the end of the the rules with headers *S*, *S'*, *B*, *C
 the first rule we get:
 
 ```
-S' = Follow(C) U Follow(B) U Follow(S') = {$}
+S' = Follow(C) U Follow(B) U Follow(S') U Follow(S) = {$}
 ```
 
 The *A* variable is *A* and *C* bodies, applying the first rule and in *C* rule has a following *c* so:
@@ -551,21 +551,19 @@ C -> AcS' | S'
 
 ```
 
-Starting with *S* we apply the first and the third rule:
+Starting with *S* :
 
 ```
 S -> aB
-First(B) = {a, c}
 
 S -> dbS'
-First(S') - {ε}
-Follow(S) = {$}
+
 ```
 
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	|S -> aB   	| S -> dbS' 	|  S -> dbS' 	|
+|  S 	| S -> aB	|    	| 	| S -> dbS' 	| 	|
 |  S' 	|   	|   	|   	|   	|   	|
 |  A 	|   	|   	|   	|   	|   	|
 |  B 	|   	|   	|   	|   	|   	|
@@ -576,8 +574,6 @@ Filling *S'* rules we apply first and second rule
 
 ```
 S' -> daS'
-First(S') - {ε} = {d}
-
 S' -> ε
 Follow(S') = {$}
 ```
@@ -585,7 +581,7 @@ Follow(S') = {$}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
+|  S 	| S -> aB	|   	| | S -> dbS'   	|	|
 |  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
 |  A 	|   	|   	|   	|   	|   	|
 |  B 	|   	|   	|   	|   	|   	|
@@ -595,7 +591,6 @@ With *A* variable we apply the first and the second:
  
  ```
 A -> aA
-First(A) - {ε} = {a}
 
 A -> ε
 Follow(A) = {c}
@@ -603,7 +598,7 @@ Follow(A) = {c}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
+|  S 	| S -> aB	|   	|   	| S -> dbS'   	|   	|
 |  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
 |  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
 |  B 	|   	|   	|   	|   	|   	|
@@ -614,27 +609,24 @@ With *B* variable we apply the first and the second:
  
  ```
 B -> aC
-First(C) - {ε} = {a, d}
 
 B -> cS'
-First(S') - {ε} ={d}
-Follow(B) = {$}
 ```
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
+|  S 	| S -> aB	|   	| 	| S -> dbS'   	|  |
 |  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
 |  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
-|  B 	| B -> aC  	|   	|   	| B -> aC,  B -> cS'  	| B -> cS'    	|
+|  B 	| B -> aC  	|   	|B -> cS'    	| 	|    	|
 |  C 	|   	|   	|   	|   	|   	|
 
 
-And to finish with *D*:
+And to finish with *C*:
 
  ```
 C -> AcS'
-First(A) - {ε} = a
+First(A) - {ε} = {a}
 
 C -> S'
 First(S') - {ε} = {d}
@@ -644,8 +636,8 @@ Follow(C) = {$}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
-|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
-|  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
-|  B 	| B -> aC  	|   	|   	| B -> aC,  B -> cS'  	| B -> cS'    	|
-|  C 	| C -> AcS'  	|   	|   	| C -> S'   	|   	| C -> S'
+|  S 	| S -> aB	| -	| 	| S -> dbS'   	| -  |
+|  S' 	| -   	| -   	| -   	| S' -> daS'   	| S' -> ε  	|
+|  A 	| A -> aA  	| -   	| A -> ε   	| -    	| -   	|
+|  B 	| B -> aC  	| -   	|B -> cS'    	| - 	| -    	|
+|  C 	| C -> AcS'   	| -| -| C -> S'   	| C -> S'  	|
