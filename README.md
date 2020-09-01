@@ -1109,3 +1109,38 @@ So filling the table:
 | 10 	|                    	|         	| R(A -> ε) 	|             	|             	|        	|         	|        	|
 | 11 	| SHIFT 10           	|         	|           	|             	|             	|        	| GOTO 11 	|        	|
 
+
+And now only thing to finish our table the *ACCEPTED* value to known when a word is accepted.
+To get the values of the column and row we have to search the number of the node that has the item:
+
+```
+S' -> S*
+```
+
+The row value will be the number of the node, and de column is *$* that means
+EOF. In our case:
+
+```
+1| S' -> S*
+```
+
+So filling the table we get:
+
+|    	|          a         	|    b    	|     c     	|      d      	|       $      	| S      	| A       	| B      	|
+|:--:	|:------------------:	|:-------:	|:---------:	|:-----------:	|:------------:	|--------	|---------	|--------	|
+|  0 	|       SHIFT 7      	|         	|           	|   SHIFT 3   	|              	| GOTO 1 	|         	| GOTO 5 	|
+|  1 	|      R(B -> 2)     	|         	|           	|   SHIFT 2   	| **ACCEPTED** 	|        	|         	|        	|
+|  2 	|                    	|         	|           	|             	|              	|        	|         	|        	|
+|  3 	|                    	| SHIFT 4 	|           	|             	|              	|        	|         	|        	|
+|  4 	|                    	|         	|           	|  R(S -> db) 	|  R(S -> db)  	|        	|         	|        	|
+| 5  	| SHIFT 6            	|         	|           	|             	|              	|        	|         	|        	|
+| 6  	|                    	|         	|           	| R(S -> Ba)  	| R(S -> Ba)   	|        	|         	|        	|
+| 7  	| SHIFT 10 R(B -> a) 	|         	| R(A -> ε) 	|             	|              	|        	| GOTO 8  	|        	|
+| 8  	|                    	|         	| SHIFT 9   	|             	|              	|        	|         	|        	|
+| 9  	|                    	|         	|           	| R(S -> aAc) 	| R(S -> aAc)  	|        	|         	|        	|
+| 10 	|                    	|         	| R(A -> ε) 	|             	|              	|        	|         	|        	|
+| 11 	| SHIFT 10           	|         	|           	|             	|              	|        	| GOTO 11 	|        	|
+
+And our table is finished!
+
+
