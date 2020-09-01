@@ -628,3 +628,24 @@ Follow(B) = {$}
 |  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
 |  B 	| B -> aC  	|   	|   	| B -> aC,  B -> cS'  	| B -> cS'    	|
 |  C 	|   	|   	|   	|   	|   	|
+
+
+And to finish with *D*:
+
+ ```
+C -> AcS'
+First(A) - {ε} = a
+
+C -> S'
+First(S') - {ε} = {d}
+Follow(C) = {$}
+
+```
+
+|    	| a 	| b 	| c 	| d 	| $ 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+|  S 	| S -> aB	|   	| S -> aB   	| S -> dbS'   	|  S -> dbS' 	|
+|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
+|  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
+|  B 	| B -> aC  	|   	|   	| B -> aC,  B -> cS'  	| B -> cS'    	|
+|  C 	| C -> AcS'  	|   	|   	| C -> S'   	|   	| C -> S'
