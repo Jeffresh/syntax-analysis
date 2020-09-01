@@ -902,4 +902,4 @@ _________
 
 Now numbering the states and composing a graph we have:
 
-
+![dfa_srl](/assets/dfa_SRL.jpg)
