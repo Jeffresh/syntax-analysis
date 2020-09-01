@@ -509,9 +509,65 @@ C = Follow(B) = {$}
 Putting the Follow sets together we get:
 
 ```
-S = {$}
-S'= {$}
-A = {c}
-B = {$}
-C = {$}
+Follow(S) = {$}
+Follow(S')= {$}
+Follow(A) = {c}
+Follow(B) = {$}
+Follow(C) = {$}
 ```
+
+### Filling the table
+
+To fill the table we to apply this 3 rules:
+1) A -> α ==> A -> α in table[A, First(α) - {ε}]
+2) A -> ε ==> A -> ε in table[A, Follow(A)]
+3) A -> α  == A =>* ε ==> A -> α in table[A, Follow(A)]
+
+```
+First sets:
+-------------------------
+First(S) = {a, d}
+First(S') = {d, ε}
+First(A) = {a, ε}
+First(B) = {a, c}
+First(C) = {ε, a, d}
+-------------------------
+Follow sets:
+-------------------------
+Follow(S) = {$}
+Follow(S')= {$}
+Follow(A) = {c}
+Follow(B) = {$}
+Follow(C) = {$}
+-------------------------
+*G3*:
+-------------------------
+S -> aB | dbS'
+S'-> daS' | ε
+A -> aA | ε 
+B -> aC| cS'
+C -> AcS' | S'
+-------------------------
+
+```
+
+Starting with *S*
+
+We apply the first and the third rule:
+
+```
+S -> aB
+First(B) = {a, c}
+
+S -> dbS'
+Follow(S) = {$}
+```
+
+
+|    	| a 	| b 	| c 	| d 	| $ 	|
+|:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
+|  S 	| S -> aB	|   	|S -> aB   	|   	|  S -> dbS' 	|
+|  S' 	|   	|   	|   	|   	|   	|
+|  A 	|   	|   	|   	|   	|   	|
+|  B 	|   	|   	|   	|   	|   	|
+|  C 	|   	|   	|   	|   	|   	|
