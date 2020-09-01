@@ -563,14 +563,14 @@ S -> dbS'
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|    	| 	| S -> dbS' 	| 	|
-|  S' 	|   	|   	|   	|   	|   	|
-|  A 	|   	|   	|   	|   	|   	|
-|  B 	|   	|   	|   	|   	|   	|
-|  C 	|   	|   	|   	|   	|   	|
+|  S 	| S -> aB	| -   	| - 	| S -> dbS' 	| - 	|
+|  S' 	| -   	| -   	| -   	| -  	| -   	|
+|  A 	| -  	| -  	| -  	| -    	| -   	|
+|  B 	| -  	| -   	| -   	| -   	| -   	|
+|  C 	| -  	| -   	| -   	| -   	| -   	|
 
 
-Filling *S'* rules we apply first and second rule
+Filling *S'* rules we apply first and the second rule
 
 ```
 S' -> daS'
@@ -581,11 +581,11 @@ Follow(S') = {$}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| | S -> dbS'   	|	|
-|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
-|  A 	|   	|   	|   	|   	|   	|
-|  B 	|   	|   	|   	|   	|   	|
-|  C 	|   	|   	|   	|   	|   	|
+|  S 	| S -> aB	| -  	| - | S -> dbS'   	| -	|
+|  S' 	| -  	| -   	| -   	| S' -> daS'   	| S' -> ε  	|
+|  A 	| -  	| -   	| -   	| -   	| -   	|
+|  B 	| -  	| -  	| -  	| -  	| -  	|
+|  C 	| -  	| -  	| -   	| -  	| -   	|
 
 With *A* variable we apply the first and the second:
  
@@ -598,14 +598,14 @@ Follow(A) = {c}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	|   	| S -> dbS'   	|   	|
-|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
-|  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
-|  B 	|   	|   	|   	|   	|   	|
-|  C 	|   	|   	|   	|   	|   	|
+|  S 	| S -> aB	| -   	| -   	| S -> dbS'   	| -  	|
+|  S' 	|  - 	| -   	| -  	| S' -> daS'   	| S' -> ε  	|
+|  A 	| A -> aA  	| -   	| A -> ε   	|  -  	| -  	|
+|  B 	| -  	|  - 	|  - 	|  - 	|  - 	|
+|  C 	| -  	|  - 	|  - 	|  - 	|  - 	|
 
 
-With *B* variable we apply the first and the second:
+With *B* variable:
  
  ```
 B -> aC
@@ -615,14 +615,14 @@ B -> cS'
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	|   	| 	| S -> dbS'   	|  |
-|  S' 	|   	|   	|   	| S' -> daS'   	| S' -> ε  	|
-|  A 	| A -> aA  	|   	| A -> ε   	|    	|   	|
-|  B 	| B -> aC  	|   	|B -> cS'    	| 	|    	|
-|  C 	|   	|   	|   	|   	|   	|
+|  S 	| S -> aB	| -   	| - 	| S -> dbS'   	| -  |
+|  S' 	|   -	|   -	|   -	| S' -> daS'   	| S' -> ε  	|
+|  A 	| A -> aA  	|   -	| A -> ε   	| -   	| -  	|
+|  B 	| B -> aC  	|   -	|B -> cS'    	| 	| -   	|
+|  C 	|   -	|   -	| -  	| -  	| -  	|
 
 
-And to finish with *C*:
+And to finish with *C* que apply the first and the third rule:
 
  ```
 C -> AcS'
@@ -636,8 +636,11 @@ Follow(C) = {$}
 
 |    	| a 	| b 	| c 	| d 	| $ 	|
 |:--:	|:-:	|:-:	|:-:	|:-:	|:-:	|
-|  S 	| S -> aB	| -	| 	| S -> dbS'   	| -  |
+|  S 	| S -> aB	| -	| -	| S -> dbS'   	| -  |
 |  S' 	| -   	| -   	| -   	| S' -> daS'   	| S' -> ε  	|
 |  A 	| A -> aA  	| -   	| A -> ε   	| -    	| -   	|
 |  B 	| B -> aC  	| -   	|B -> cS'    	| - 	| -    	|
 |  C 	| C -> AcS'   	| -| -| C -> S'   	| C -> S'  	|
+
+
+So, how you can see is a LL(1) grammar because there is only a rule per cell in the table
