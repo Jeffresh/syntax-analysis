@@ -643,7 +643,10 @@ Follow(C) = {$}
 |  C 	| C -> AcS'   	| -| -| C -> S'   	| C -> S'  	|
 
 
-So, how you can see is a LL(1) grammar because there is only a rule per cell in the table.
+
+#### Is s LLR(1) grammar?
+How you can see is a LL(1) grammar because there is only a rule per cell in the table, so we can
+decide witch rule apply only reading the next character.
 
 
 ### Checking if G2 grammar is SLR
@@ -1144,4 +1147,9 @@ So filling the table we get:
 
 And our table is finished!
 
+
+#### Is a SLR(1) grammar?
+
+The answer is no, because in the cell of our SLR(1) analysis table [a, 7] we have
+two rules, so we cannot decide which rule apply only reading one character.
 
